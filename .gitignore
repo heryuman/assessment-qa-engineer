@@ -33,3 +33,5 @@ coverage.xml
 .vscode/
 *.swp
 *.swo
+collection.qa.test.json
+testsqa
