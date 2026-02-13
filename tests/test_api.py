@@ -135,9 +135,11 @@ async def test_inventory_value_bug(client, admin_token):
         headers={"Authorization": f"Bearer {admin_token}"}
     )
 
-    # Debería ser 40
+ 
     assert response.json()["total_value"] == 40
 
+
+
 #--
 @pytest.mark.asyncio
 async def test_update_product_zero_quantity_bug(client, admin_token):
@@ -155,26 +157,7 @@ async def test_update_product_zero_quantity_bug(client, admin_token):
         json={"quantity": 0}
     )
 
-    # debería actualizar a 0
-    assert update.json()["quantity"] == 0
-#--
-@pytest.mark.asyncio
-async def test_update_product_zero_quantity_bug(client, admin_token):
-    create = await client.post(
-        "/products",
-        headers={"Authorization": f"Bearer {admin_token}"},
-        json={"name": "Test", "price": 100, "quantity": 10}
-    )
 
-    product_id = create.json()["id"]
-
-    update = await client.put(
-        f"/products/{product_id}",
-        headers={"Authorization": f"Bearer {admin_token}"},
-        json={"quantity": 0}
-    )
-
-    # debería actualizar a 0
     assert update.json()["quantity"] == 0
 
 
